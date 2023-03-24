@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Realtime Map</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY9sKyb4Cv9YLWhAVn9U9konardJ6-TO0&callback=initMap&libraries=&v=weekly""></script>
+</head>
+<!-- <style>
+.header_text {
+  display: inline-block;
+}
+</style> -->
+<body>
+  <h2>Tracking map </h2>
+  <div id="map" style="width: 100%; height: 600px;"></div>
+
+<!--     <script>
+        function updateMap(lat, lon) {
+            // Khởi tạo bản đồ
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: lat, lng: lon},
+                zoom: 10
+            });
+            // Thêm đánh dấu tại vị trí
+            var marker = new google.maps.Marker({
+                position: {lat: lat, lng: lon},
+                map: map,
+                title: 'Vị trí hiện tại'
+            });
+        }
+                               
+        $(document).ready(function() {
+            // Gửi yêu cầu AJAX mỗi 5 giây và cập nhật vị trí trên bản đồ
+            setInterval(function() {
+                $.ajax({
+                  type:"GET",
+                    // url: '/get_location/',
+                    url : "{% url 'get_location' %}",
+                    success: function(data) {
+                      console.log(data)
+                      var lat = data.lat;
+                      var lon = data.lon;
+                      updateMap(lat, lon);
+                    },
+                    error : function(response){
+                        alert("No Data");
+                    },
+                });
+            }, 5000);
+        });
+    </script> -->
+<script>
+    var map;
+    var marker;
+                        
+    function updateMarker(lat, lon) {
+        if (!marker) {
+            // Tạo đánh dấu mới nếu chưa có
+            marker = new google.maps.Marker({
+                position: {lat: lat, lng: lon},
+                map: map,
+                title: 'Vị trí hiện tại'
+            });
+        } else {
+            // Cập nhật vị trí của đánh dấu
+            marker.setPosition({lat: lat, lng: lon});
+        }
+        // Căn chỉnh vị trí bản đồ theo đánh dấu
+        map.panTo({lat: lat, lng: lon});
+    }
+                           
+    function initMap() {
+        // Khởi tạo bản đồ
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 0, lng: 0},
+            zoom: 15
+        });
+    }
+                           
+    $(document).ready(function() {
+        // Gửi yêu cầu AJAX mỗi 5 giây và cập nhật vị trí trên bản đồ
+        setInterval(function() {
+            $.ajax({
+              type:"GET",
+                // url: '/get_location/',
+                url : "{% url 'get_location' %}",
+                success: function(data) {
+                  console.log(data)
+                  var lat = data.lat;
+                  var lon = data.lon;
+                  updateMarker(lat, lon);
+                },
+                error : function(response){
+                    alert("No Data");
+                },
+            });
+        }, 1000);
+    });
+</script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY9sKyb4Cv9YLWhAVn9U9konardJ6-TO0&callback=initMap&libraries=&v=weekly&callback=initMap">
+  </script>
+</body>
+</html>
+
+
+
+
+
+

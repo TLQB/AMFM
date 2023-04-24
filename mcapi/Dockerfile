@@ -1,9 +1,13 @@
-ARG PYTHON_VERSION=3.10-slim-buster
+ARG PYTHON_VERSION=3.7-slim-buster
 
 FROM python:${PYTHON_VERSION}
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+# Convert file install unoconv 
+RUN apt-get update && apt-get install -y unoconv
+ENV PYTHONPATH ${PYTHONPATH}:/usr/lib/python3/dist-packages
 
 RUN mkdir -p /code
 

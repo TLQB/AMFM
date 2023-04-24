@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     'order',
     'rgps',
+    'rtf_to_pdf',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'mcapi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'rgps/template')],
+        'DIRS': [os.path.join(BASE_DIR,'rtf_to_pdf/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

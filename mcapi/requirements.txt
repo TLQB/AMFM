@@ -4,3 +4,7 @@ whitenoise==5.3.0
 djangorestframework
 paho-mqtt==1.6.1
 python-etcd==0.4.5
+
+
+#convert_file 
+pymupdf

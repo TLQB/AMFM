@@ -21,4 +21,5 @@ urlpatterns = [
     path('api',include("api.urls")),
     path('',include("order.urls")),
     path('rgps',include("rgps.urls")),
+    path('convert_file',include("rtf_to_pdf.urls")),
 ]

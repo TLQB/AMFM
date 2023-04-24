@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Convert RTF to PDF</title>
+    <style>
+      .center {
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+
+</head>
+<body>
+    <h1 style="text-align: center;">Chương trình convert folder file rtf to folder file pdf của bạn Đô Đỗ ...</h1>
+    <h4 style="text-align: center;">(Chờ bạn Đô mời nhậu ...:)) )</h4><br>
+    <h2 style="text-align: center;">Upload File</h2>
+    
+    <div class="center">
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input id="input-file" type="file" name="files" webkitdirectory directory multiple>
+            <button id="submit-btn" type="submit" disabled>Upload and Convert</button><br><br>
+
+        </form>
+    </div>
+    <script>
+        const inputFile = document.getElementById('input-file');
+        const submitBtn = document.getElementById('submit-btn');
+
+        inputFile.addEventListener('change', function() {
+          if (inputFile.files.length > 0) {
+            submitBtn.disabled = false;
+          } else {
+            submitBtn.disabled = true;
+          }
+        });
+    </script>
+
+</body>
+</html>
